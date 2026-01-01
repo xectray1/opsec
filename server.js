@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const WHITELIST = ['1338555188570755182']; // Add alts here
-const SECRET_KEY = 'key1'; // Change this!
+const WHITELIST = ['1338555188570755182'];
+const SECRET_KEY = 'key1';
 
 app.get('/validate', (req, res) => {
     const { discord_id, key } = req.query;
