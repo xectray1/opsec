@@ -1,17 +1,16 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
 
 const WHITELIST = ['1338555188570755182'];
-const SECRET_KEY = 'key1';
+const SECRET_KEY = process.env.SECRET_KEY;
 
-app.get('/validate', (req, res) => {
+app.get('/', (req, res) => {
     const { discord_id, key } = req.query;
-    
+
     if (key !== SECRET_KEY) {
         return res.status(403).json({ valid: false, error: 'Invalid key' });
     }
-    
+
     if (WHITELIST.includes(discord_id)) {
         res.json({ valid: true });
     } else {
@@ -19,6 +18,4 @@ app.get('/validate', (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+module.exports = app;
